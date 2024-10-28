@@ -1,0 +1,4 @@
+[submodule "blog-setting"]
+	path = blog-setting
+	url = https://github.com/namtndus/blog-setting.git
+	branch = main
