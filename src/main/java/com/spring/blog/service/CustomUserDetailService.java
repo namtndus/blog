@@ -60,13 +60,13 @@ public class CustomUserDetailService implements UserDetailsService {
 
     // 회원가입
     public boolean signup(SignupDto signupDto) {
-        boolean isChecked = usersRepository.existsByUsername(signupDto.getUsername());
+        boolean isChecked = usersRepository.existsByUsername(signupDto.getUserId());
         if (isChecked) {
             return false;
         }
 
         Users users = new Users();
-        users.setUsername(signupDto.getUsername());
+        users.setUserId(signupDto.getUserId());
         users.setPassword(passwordEncoder.encode(signupDto.getPassword()));
         users.setNickname(signupDto.getNickname());
         users.setRole("ROLE_USER");
