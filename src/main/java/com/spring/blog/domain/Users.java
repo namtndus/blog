@@ -14,19 +14,15 @@ public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userPk;
 
     @Column(nullable = true)
-    private String username;
+    private String userId;
 
     private String nickname;
 
     private String password;
 
     private String role;
-
-    @OneToMany(mappedBy = "users")
-    List<Subject> subjectList = new ArrayList<Subject>();
-
 
 }
