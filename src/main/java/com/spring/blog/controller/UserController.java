@@ -80,6 +80,14 @@ public class UserController {
 
     @DeleteMapping("/profile")
     public ResponseEntity<ResponseDto> profile(HttpServletRequest request, HttpServletResponse response) {
+        log.info("회원 탈퇴 시작");
+
+        try {
+            boolean isChecked = customUserDetailService.signout(request, response);
+        }catch (Exception e){
+            e.getStackTrace();
+        }
+        log.info("회원 탈퇴 종료");
         return ResponseEntity.status(HttpStatus.OK).body(
                 ResponseDto.builder()
                         .status("success")

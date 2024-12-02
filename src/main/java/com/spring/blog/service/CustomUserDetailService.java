@@ -8,6 +8,7 @@ import com.spring.blog.repository.UsersRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.password.CompromisedPasswordException;
@@ -122,14 +123,34 @@ public class CustomUserDetailService implements UserDetailsService {
         return true;
     }
 
+    // delete 문에서는 아래 어노테이션을 붙여야 실행이 될까?
+    @Transactional
     // 회원 탈퇴
-    public boolean signout(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public boolean signout(HttpServletRequest req, HttpServletResponse res){
+        log.info("회원 탈퇴 서비스 시작");
 
-        String principal = (String) authentication.getPrincipal();
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        Users userData = usersRepository.findByUsername(principal);
-        usersRepository.delete(userData);
+            CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
+            log.info("회원 탈퇴에서의 이름 : {}", principal.getUsername());
+            if(authentication != null){
+                new SecurityContextLogoutHandler().logout(req, res, authentication);
+            }
+
+            Cookie[] cookies = req.getCookies();
+
+            for (Cookie cookie : cookies) {
+                log.info("쿠키들의 key : {}", cookie.getName());
+                cookie.setMaxAge(0);
+                res.addCookie(cookie);
+            }
+            usersRepository.deleteByUsername(principal.getUsername());
+            log.info("회원 탈퇴 서비스 종료");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         return true;
     }
 }
