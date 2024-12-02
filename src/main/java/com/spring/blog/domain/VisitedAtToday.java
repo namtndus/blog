@@ -1,9 +1,8 @@
 package com.spring.blog.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 public class VisitedAtToday {
@@ -11,5 +10,9 @@ public class VisitedAtToday {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long visitedAtTodayPk;
 
+    @Column(nullable = false)
     private String clientIP;
+
+    @Column(nullable = false)
+    private LocalDateTime visitDate;
 }
