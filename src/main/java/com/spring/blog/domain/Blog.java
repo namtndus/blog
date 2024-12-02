@@ -1,9 +1,6 @@
 package com.spring.blog.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +10,12 @@ public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long blogPk;
+
+    @Column(nullable = false)
     private String blogName;
+
     private String blogDescription;
+
+    @Column(nullable = false)
     private LocalDateTime created;
 }
