@@ -16,13 +16,16 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userPk;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String userId;
 
+    @Column(nullable = false)
     private String nickname;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String role;
 
 }
