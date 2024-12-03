@@ -4,8 +4,8 @@ import com.spring.blog.domain.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UsersRepository extends JpaRepository<Users, Integer> {
-    Users findByUsername(String username);
+    Users findByUserId(String userId);
 
-    boolean existsByUsername(String username);
-    void deleteByUsername(String username);
+    boolean existsByUserId(String userId);
+    void deleteByUserId(String userId);
 }

@@ -49,7 +49,7 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Users userData = usersRepository.findByUsername(username);
+        Users userData = usersRepository.findByUserId(username);
 
         if (userData == null) {
             throw new UsernameNotFoundException(username);
@@ -60,7 +60,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
     // 회원가입
     public boolean signup(SignupDto signupDto) {
-        boolean isChecked = usersRepository.existsByUsername(signupDto.getUserId());
+        boolean isChecked = usersRepository.existsByUserId(signupDto.getUserId());
         if (isChecked) {
             return false;
         }
@@ -145,7 +145,7 @@ public class CustomUserDetailService implements UserDetailsService {
                 cookie.setMaxAge(0);
                 res.addCookie(cookie);
             }
-            usersRepository.deleteByUsername(principal.getUsername());
+            usersRepository.deleteByUserId(principal.getUsername());
             log.info("회원 탈퇴 서비스 종료");
         }catch (Exception e){
             e.printStackTrace();
