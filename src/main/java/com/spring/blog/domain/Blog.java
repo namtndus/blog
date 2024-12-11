@@ -30,5 +30,5 @@ public class Blog {
     private Users users;
 
     @OneToMany(mappedBy = "blog")
-    List<Article> articles = new ArrayList<>();
+    List<Board> articles = new ArrayList<>();
 }
