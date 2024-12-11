@@ -29,6 +29,6 @@ public class Board {
     @JoinColumn(name = "category_pk")
     private Category category;
 
-    @OneToMany
+    @OneToMany(mappedBy = "board")
     private List<Article> articles;
 }

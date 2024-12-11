@@ -19,6 +19,6 @@ public class Category {
     @Column(nullable = false)
     private String categoryName;
 
-    @OneToMany
+    @OneToMany(mappedBy = "category")
     private List<Board> board = new ArrayList<Board>();
 }
