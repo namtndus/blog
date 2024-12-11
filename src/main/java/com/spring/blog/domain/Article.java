@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,4 +37,14 @@ public class Article {
 
     @Column(nullable = false)
     private LocalDateTime updated;
+
+    @ManyToOne
+    @JoinColumn(name = "board_pk")
+    private Board board;
+
+    @OneToMany(mappedBy = "article")
+    List<Like> likes = new ArrayList<Like>();
+
+    @OneToMany(mappedBy = "article")
+    List<Comment> comments = new ArrayList<Comment>();
 }
