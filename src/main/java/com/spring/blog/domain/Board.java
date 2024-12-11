@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -26,4 +28,7 @@ public class Board {
     @ManyToOne
     @JoinColumn(name = "category_pk")
     private Category category;
+
+    @OneToMany
+    private List<Article> articles;
 }
