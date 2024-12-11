@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,4 +30,9 @@ public class Comment {
 
     @Column(nullable = false)
     private LocalDateTime updated;
+
+    @ManyToOne
+    @JoinColumn(name = "article_pk")
+    private Article article;
+
 }
