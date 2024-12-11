@@ -19,4 +19,11 @@ public class Board {
     @Column(nullable = false)
     private Integer countArticle;
 
+    @ManyToOne
+    @JoinColumn(name = "blog_pk")
+    private Blog blog;
+
+    @ManyToOne
+    @JoinColumn(name = "category_pk")
+    private Category category;
 }
