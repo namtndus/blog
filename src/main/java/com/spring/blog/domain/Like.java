@@ -14,4 +14,12 @@ public class Like {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long likePk;
 
+    @ManyToOne
+    @JoinColumn(name = "users_pk")
+    private Users users;
+
+    @ManyToOne
+    @JoinColumn(name = "article_pk")
+    private Article article;
+
 }
