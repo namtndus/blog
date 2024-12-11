@@ -18,5 +18,9 @@ public class VisitedAtToday {
     private String clientIP;
 
     @Column(nullable = false)
-    private LocalDateTime visitDate;
+    private LocalDateTime visitedDate;
+
+    @ManyToOne
+    @JoinColumn(name = "article_pk")
+    private Article article;
 }
