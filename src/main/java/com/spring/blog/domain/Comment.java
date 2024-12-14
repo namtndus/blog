@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Comment {
+public class Comment extends Auditable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +24,6 @@ public class Comment {
 
     @Column(nullable = false)
     private Boolean isUpdated;
-
-    @Column(nullable = false)
-    private LocalDateTime created;
-
-    @Column(nullable = false)
-    private LocalDateTime updated;
 
     @ManyToOne
     @JoinColumn(name = "article_pk")
