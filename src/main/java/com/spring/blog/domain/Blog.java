@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Blog {
+public class Blog extends Auditable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
