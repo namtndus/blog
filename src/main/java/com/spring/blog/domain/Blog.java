@@ -1,8 +1,11 @@
 package com.spring.blog.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,6 +14,8 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Builder
+@EntityListeners(AuditingEntityListener.class)
 public class Blog extends Auditable{
 
     @Id
@@ -23,6 +28,7 @@ public class Blog extends Auditable{
     private String blogDescription;
 
     @Column(nullable = false)
+    @CreatedDate
     private LocalDateTime created;
 
     @ManyToOne

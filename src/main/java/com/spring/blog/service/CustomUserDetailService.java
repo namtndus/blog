@@ -49,7 +49,9 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Users userData = usersRepository.findByUserId(username);
+        log.info("매개변수 값은: {}",username);
+
+        Users userData = usersRepository.findByUserId(username).get();
 
         if (userData == null) {
             throw new UsernameNotFoundException(username);
@@ -65,11 +67,11 @@ public class CustomUserDetailService implements UserDetailsService {
             return false;
         }
 
-        Users users = new Users();
-        users.setUserId(signupDto.getUserId());
-        users.setPassword(passwordEncoder.encode(signupDto.getPassword()));
-        users.setNickname(signupDto.getNickname());
-        users.setRole("ROLE_USER");
+        Users users = Users.builder()
+                .userId(signupDto.getUserId())
+                .password(passwordEncoder.encode(signupDto.getPassword()))
+                .nickname(signupDto.getNickname())
+                .role("ROLE_USER").build();
 
         usersRepository.save(users);
         return true;
